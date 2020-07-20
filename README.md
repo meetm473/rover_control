@@ -8,4 +8,4 @@ roslaunch rover_control rover_controller.launch
 ```
 > In the terminal, press *h* to display help for keyboard control.
 
-[1]:link-to-rover
+[1]:https://github.com/meetm473/rover
