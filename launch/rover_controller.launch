@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+	
+	<arg name="model" value="rover"/>
+	
+	<include file="$(find rover)/launch/rover.launch">
+		<arg name="model_name" value="$(arg model)"/>
+	</include>
+	
+	<group ns="$(arg model)">
+		<!-- Loading controllers -->
+		<rosparam file="$(find rover_control)/config/rover_joints.yaml"
+			command="load"/>
+		
+		<node name="controller_spawner" 
+		 pkg="controller_manager" 
+		 type="spawner"
+		 respawn="false"
+		 output="screen" 
+		 args="joint_state_controller 
+			  wheel_1_vel_controller 
+			  wheel_2_vel_controller 
+			  wheel_3_vel_controller 
+			  wheel_4_vel_controller 
+			  wheel_5_vel_controller 
+			  wheel_6_vel_controller"/>
+		
+		
+		<node name="rover_keyboard_controller"
+			pkg="rover_control"
+			type="rover_keyboard_control"
+			respawn="false"
+			output="screen"/>
+		
+	</group>
+	
+</launch>
